@@ -41,5 +41,6 @@ public class CreateRandomImage {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        //aaa
     }
 }
