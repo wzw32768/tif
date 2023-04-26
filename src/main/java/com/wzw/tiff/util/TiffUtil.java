@@ -12,7 +12,12 @@ import java.util.List;
 public class TiffUtil {
     private List<String> processingList = new ArrayList<>();
 
-    //提取tiff中第一张图片
+    /**
+     * 提取tiff中第一张图片
+     *
+     * @param tifFile 要提取的tif图片
+     * @param target  提取后的图片
+     */
     public static void tifGetFirstFrame(File tifFile, File target) {
         if (target == null) {
             throw new RuntimeException("目标路径不正确");
@@ -34,7 +39,12 @@ public class TiffUtil {
         }
     }
 
-    //在有同名文件的情况下重命名并创建空文件
+    /**
+     * 在有同名文件的情况下重命名并创建空文件
+     *
+     * @param target 原文件
+     * @return 修改文件名后的文件
+     */
     public static synchronized File createEmptyTargetFile(File target) {
         File parentPath = target.getParentFile();
         if (target.exists()) {
@@ -63,11 +73,20 @@ public class TiffUtil {
         return target;
     }
 
+    /**
+     * 在有同名文件的情况下重命名并创建空文件
+     * @param filePath 原文件位置
+     * @param target 修改文件名后的文件位置
+     */
     public static void tifGetFirstFrame(String filePath, String target) {
         tifGetFirstFrame(new File(filePath), new File(target));
     }
 
-    //防止一张图被同时提取多次
+    /**
+     * 提取tiff图片第一张并防止一张图被同时提取多次
+     * @param file 原文件
+     * @param target 目标文件
+     */
     public void tifGetFirstFrameExclusively(File file, File target) {
         synchronized (TiffUtil.class) {
             if (processingList.contains(file.getAbsolutePath())) {
@@ -79,7 +98,10 @@ public class TiffUtil {
         processingList.remove(file.getAbsolutePath());
     }
 
-    //提取tiff中所有图片
+    /**
+     * 提取tiff中所有图片
+     * @param tifFile 待提取的tiff图片
+     */
     public static void tifToPNG(File tifFile) {
         File target = new File("test-files", tifFile.getName());
         target.mkdirs();

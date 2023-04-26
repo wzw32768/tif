@@ -15,7 +15,13 @@ public class CreateRandomImage {
 //        }
     }
 
-    public static void generatePic(int width, int height, String path) throws IOException {
+    /**
+     * 生成随即图片
+     * @param width 宽度（像素）
+     * @param height 高度（像素）
+     * @param path 输出路径
+     */
+    public static void generatePic(int width, int height, String path) {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         Graphics2D g2 = (Graphics2D) bi.getGraphics();
         Random random = new Random();
@@ -26,21 +32,21 @@ public class CreateRandomImage {
                 g2.drawRect(x, y, 1, 1);
             }
         }
-        ImageIO.write(bi, "bmp", new File(path));
+        try {
+            ImageIO.write(bi, "bmp", new File(path));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
-     * @param size mb
-     * @param path
+     * 以指定大小生成随机图片
+     * @param size 要生成的随即图片的大小（单位MB）
+     * @param path 输出路径
      */
     public static void generatePicWithSize(int size, String path) {
         long pixels = size * 1024 * 1024 / 3;
         int a = (int) Math.sqrt(pixels);
-        try {
-            generatePic(a, a, path);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        //aaa
+        generatePic(a, a, path);
     }
 }
