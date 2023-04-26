@@ -8,7 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Tiff提取图片工具类
+ * @author wzw
+ */
 public class TiffUtil {
     private List<String> processingList = new ArrayList<>();
 

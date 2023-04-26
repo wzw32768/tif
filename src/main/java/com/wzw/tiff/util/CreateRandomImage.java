@@ -6,7 +6,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-
+/**
+ * 创建随机图片工具类
+ * @author wzw
+ */
 public class CreateRandomImage {
     public static void main(String[] args) throws Exception {
         generatePicWithSize(40, "D:/images/13.bmp");
