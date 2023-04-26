@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"com.wzw.tiff.util","l":"CreateRandomImage"},{"p":"com.wzw.tiff.util","l":"TiffUtil"},{"l":"所有类和接口","u":"allclasses-index.html"}];updateSearchResults();

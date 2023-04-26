@@ -8,8 +8,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * Tiff提取图片工具类
+ *
  * @author wzw
  */
 public class TiffUtil {
@@ -20,6 +22,9 @@ public class TiffUtil {
      *
      * @param tifFile 要提取的tif图片
      * @param target  提取后的图片
+     * <p>
+     * 示例：
+     * tifGetFirstFrame(new File("D:/images/example.tif"),new File("D:/images/a.png"));
      */
     public static void tifGetFirstFrame(File tifFile, File target) {
         if (target == null) {
@@ -77,9 +82,13 @@ public class TiffUtil {
     }
 
     /**
-     * 在有同名文件的情况下重命名并创建空文件
+     * 提取tiff中第一张图片
+     *
      * @param filePath 原文件位置
-     * @param target 修改文件名后的文件位置
+     * @param target   修改文件名后的文件位置
+     * <p>
+     * 示例：
+     * tifGetFirstFrame("D:/images/example.tif", "D:/images/a.png");
      */
     public static void tifGetFirstFrame(String filePath, String target) {
         tifGetFirstFrame(new File(filePath), new File(target));
@@ -87,7 +96,8 @@ public class TiffUtil {
 
     /**
      * 提取tiff图片第一张并防止一张图被同时提取多次
-     * @param file 原文件
+     *
+     * @param file   原文件
      * @param target 目标文件
      */
     public void tifGetFirstFrameExclusively(File file, File target) {
@@ -103,6 +113,7 @@ public class TiffUtil {
 
     /**
      * 提取tiff中所有图片
+     *
      * @param tifFile 待提取的tiff图片
      */
     public static void tifToPNG(File tifFile) {

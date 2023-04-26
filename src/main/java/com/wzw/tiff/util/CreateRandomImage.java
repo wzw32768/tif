@@ -11,18 +11,15 @@ import java.util.Random;
  * @author wzw
  */
 public class CreateRandomImage {
-    public static void main(String[] args) throws Exception {
-        generatePicWithSize(40, "D:/images/13.bmp");
-//        for (int i = 0; i < 100; i++) {
-//            generatePicWithSize(2, "D:/images/" + i + ".bmp");
-//        }
-    }
 
     /**
-     * 生成随即图片
+     * 生成随机图片
      * @param width 宽度（像素）
      * @param height 高度（像素）
      * @param path 输出路径
+     * <p>
+     * 示例：
+     * generatePic(800, 600, "D:/images/target.png")
      */
     public static void generatePic(int width, int height, String path) {
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -46,6 +43,10 @@ public class CreateRandomImage {
      * 以指定大小生成随机图片
      * @param size 要生成的随即图片的大小（单位MB）
      * @param path 输出路径
+     * <p>
+     * 示例：
+     * generatePic(100, "D:/images/target.bmp")
+     * 会在"D:/images/"下生成100MB大小的随机图片target.bmp
      */
     public static void generatePicWithSize(int size, String path) {
         long pixels = size * 1024 * 1024 / 3;
