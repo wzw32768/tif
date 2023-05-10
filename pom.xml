@@ -2,14 +2,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.wzw</groupId>
+    <groupId>io.github.wzw32768</groupId>
     <artifactId>tif-util</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <name>TifUtil</name>
     <url>http://maven.apache.org</url>
-
+    <description>desc1234</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -22,5 +22,120 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!--mvn中央仓库配置-->
+    <!-- 开源签名证书 -->
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <!-- 仓库信息 -->
+    <scm>
+        <connection>scm:git:git@github.com:wzw32768/tif.git</connection>
+        <developerConnection>scm:git:git@github.com:wzw32768/tif.git
+        </developerConnection>
+        <url>https://github.com/wzw32768/tif</url>
+    </scm>
+
+    <!-- 开发人员信息 -->
+    <developers>
+        <developer>
+            <name>wzw</name>
+            <email>914774545@qq.com</email>
+            <organization>https://github.com/wzw32768</organization>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    <!-- 发布管理信息 -->
+    <distributionManagement>
+        <repository>
+            <!-- 这里的id必须要和全局配置中的release id 一致 -->
+            <id>oss</id>
+            <!--            <name>Nexus Release Repository</name>-->
+            <!-- 这里就是在创建issue成功后，对方回复的release发布地址-->
+            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+        <snapshotRepository>
+            <!-- 这里的id必须要和全局配置中的snapshot id 一致 -->
+            <id>oos</id>
+            <!--            <name>Nexus Snapshot Repository</name>-->
+            <!-- 这里就是在创建issue成功后，对方回复的snapshot发布地址-->
+            <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <!-- 这里的id必须要和全局配置中的release id 一致 -->
+                    <serverId>sonatype</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <!-- 如果希望发布后自动执行close和release操作，此处可以调整为true -->
+                    <skipStagingRepositoryClose>true</skipStagingRepositoryClose>
+                    <autoReleaseAfterClose>false</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
+
+            <!-- 生成java source.jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 生成asc 校验文件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <!-- 必须和配置中的gpg校验id一致 -->
+                        <id>gpg</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.0.1</version>
+                <configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+                    <additionalJOptions>
+                        <additionalJOption>-Xdoclint:none</additionalJOption>
+                    </additionalJOptions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
