@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +65,24 @@ public class TifUtil {
 
         ByteArrayOutputStream byteArrayOutputStream;
         try (ImageInputStream input = ImageIO.createImageInputStream(TifFile)) {
+            ImageReader reader = ImageIO.getImageReaders(input).next();
+            //顺序读取，忽略元数据
+            reader.setInput(input, true, false);
+            //只读取第一张
+            BufferedImage image = reader.read(0);
+            byteArrayOutputStream = new ByteArrayOutputStream();
+            ImageIO.write(image, "bmp", byteArrayOutputStream);
+            reader.dispose();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("tif转换失败");
+        }
+        return byteArrayOutputStream;
+    }
+
+    public static ByteArrayOutputStream getFirstFrame(InputStream inputStream) {
+        ByteArrayOutputStream byteArrayOutputStream;
+        try (ImageInputStream input = ImageIO.createImageInputStream(inputStream)) {
             ImageReader reader = ImageIO.getImageReaders(input).next();
             //顺序读取，忽略元数据
             reader.setInput(input, true, false);
