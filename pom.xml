@@ -4,7 +4,7 @@
 
     <groupId>io.github.wzw32768</groupId>
     <artifactId>tif-util</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.4</version>
     <packaging>jar</packaging>
 
     <name>TifUtil</name>
@@ -76,7 +76,7 @@
                 <extensions>true</extensions>
                 <configuration>
                     <!-- 这里的id必须要和全局配置中的release id 一致 -->
-                    <serverId>sonatype</serverId>
+                    <serverId>oss</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <!-- 如果希望发布后自动执行close和release操作，此处可以调整为true -->
                     <skipStagingRepositoryClose>true</skipStagingRepositoryClose>

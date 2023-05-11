@@ -27,7 +27,7 @@ public class TifUtil {
      *                示例：
      *                tifGetFirstFrame(new File("D:/images/example.tif"),new File("D:/images/a.png"));
      */
-    public static void tifGetFirstFrameToFile(File TifFile, File target) {
+    public static void getFirstFrameToFile(File TifFile, File target) {
         if (target == null) {
             throw new RuntimeException("目标路径不正确");
         }
@@ -57,7 +57,7 @@ public class TifUtil {
      * @param TifFile 要提取的tif图片
      * @return ByteArrayOutputStream对象，你可以使用该类的writeTo方法把它转换成别的OutputStream，如FileOutputStream
      */
-    public static ByteArrayOutputStream tifGetFirstFrame(File TifFile) {
+    public static ByteArrayOutputStream getFirstFrame(File TifFile) {
         if (TifFile == null) {
             throw new RuntimeException("源路径不正确");
         }
@@ -123,8 +123,8 @@ public class TifUtil {
      *                 示例：
      *                 tifGetFirstFrame("D:/images/example.tif", "D:/images/a.png");
      */
-    public static void tifGetFirstFrameToFile(String filePath, String target) {
-        tifGetFirstFrameToFile(new File(filePath), new File(target));
+    public static void getFirstFrameToFile(String filePath, String target) {
+        getFirstFrameToFile(new File(filePath), new File(target));
     }
 
     /**
@@ -133,14 +133,14 @@ public class TifUtil {
      * @param file   原文件
      * @param target 目标文件
      */
-    public void tifGetFirstFrameExclusively(File file, File target) {
+    public void getFirstFrameExclusively(File file, File target) {
         synchronized (TifUtil.class) {
             if (processingList.contains(file.getAbsolutePath())) {
                 throw new RuntimeException("有进程在处理这个文件");
             }
             processingList.add(file.getAbsolutePath());
         }
-        tifGetFirstFrameToFile(file, target);
+        getFirstFrameToFile(file, target);
         processingList.remove(file.getAbsolutePath());
     }
 
