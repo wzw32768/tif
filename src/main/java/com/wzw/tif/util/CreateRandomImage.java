@@ -1,4 +1,4 @@
-package com.wzw.tiff.util;
+package com.wzw.tif.util;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

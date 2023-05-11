@@ -4,7 +4,7 @@
 
     <groupId>io.github.wzw32768</groupId>
     <artifactId>tif-util</artifactId>
-    <version>0.0.3</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
 
     <name>TifUtil</name>
@@ -134,6 +134,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+<!--                <configuration>-->
+<!--                    <source>7</source>-->
+<!--                    <target>7</target>-->
+<!--                </configuration>-->
             </plugin>
         </plugins>
     </build>
